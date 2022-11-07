@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.5.3",
+    "formik": "^2.2.9",
     "framer-motion": "^7.6.2",
     "leaflet": "^1.9.2",
     "leaflet-defaulticon-compatibility": "^0.1.1",
@@ -25,7 +26,8 @@
     "react-tabs": "^5.1.0",
     "supercluster": "^7.1.5",
     "swiper": "^8.4.4",
-    "use-supercluster": "^0.4.0"
+    "use-supercluster": "^0.4.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.12",
