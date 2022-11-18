@@ -25,6 +25,7 @@
     "react-scroll-to-top": "^3.0.0",
     "react-tabs": "^5.1.0",
     "supercluster": "^7.1.5",
+    "sweetalert2": "^11.6.9",
     "swiper": "^8.4.4",
     "use-supercluster": "^0.4.0",
     "yup": "^0.32.11"

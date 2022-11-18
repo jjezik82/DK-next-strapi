@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import Swal from 'sweetalert2';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 let schema = yup.object().shape({
   name: yup.string().required('Vaše meno je povinný údaj.'),
@@ -12,29 +15,43 @@ let schema = yup.object().shape({
   message: yup.string().required('Obsah správy je povinný údaj.'),
 });
 const ContactForm = () => {
-  async function submitHandler(e) {
-    e.preventDefault();
-    const formData = {};
-    Array.from(e.currentTarget.elements).forEach((field) => {
-      if (!field.name) return;
-      formData[field.name] = field.value;
+  async function submitHandler(values) {
+    const formData = values;
+    const sendForm = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/sendmail`,
+      {
+        method: 'POST',
+        body: JSON.stringify(formData),
+      }
+    );
+    const res = await sendForm.json();
+    if (!res.ok) {
+      Swal.fire({
+        title: 'Chyba!',
+        text: res.error?.message,
+        icon: 'error',
+        confirmButtonText: 'Zavrieť',
+      });
+    }
+    Swal.fire({
+      title: 'Ďakujeme!',
+      text: 'Vaša správa bola odoslaná úspešne.',
+      icon: 'success',
+      showConfirmButton: false,
+      timer: 3000,
     });
-    fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/sendmail`, {
-      method: 'post',
-      body: JSON.stringify(formData),
-    });
-    console.log(formData);
   }
+
   return (
     <div className='xl:w-1/2 max-w-xl p-10 m-10'>
       <Formik
         initialValues={{ name: '', email: '', subject: '', message: '' }}
         validationSchema={schema}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+        onSubmit={async (values, { setSubmitting, resetForm }) => {
+          setSubmitting(true);
+          submitHandler(values);
+          resetForm();
+          setSubmitting(false);
         }}
       >
         {({
@@ -45,7 +62,6 @@ const ContactForm = () => {
           handleBlur,
           handleSubmit,
           isSubmitting,
-          /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit} noValidate>
             <div className='grid grid-cols-1 gap-6'>
@@ -83,7 +99,7 @@ const ContactForm = () => {
                   `}
                 />
                 <p className='text-md text-red-400'>
-                  {errors.name && touched.name}
+                  {errors.name && touched.name && errors.name}
                 </p>
               </label>
               <label className='block'>
@@ -119,7 +135,7 @@ const ContactForm = () => {
                   placeholder='john@example.com'
                 />
                 <p className='text-md text-red-400'>
-                  {errors.email && touched.email}
+                  {errors.email && touched.email && errors.email}
                 </p>
               </label>
               <label className='block'>
@@ -154,7 +170,7 @@ const ContactForm = () => {
                   `}
                 />
                 <p className='text-md text-red-400'>
-                  {errors.subject && touched.subject}
+                  {errors.subject && touched.subject && errors.subject}
                 </p>
               </label>
               <label className='block'>
@@ -189,17 +205,30 @@ const ContactForm = () => {
                   rows='3'
                 ></textarea>
                 <p className='text-md text-red-400'>
-                  {errors.message && touched.message}
+                  {errors.message && touched.message && errors.message}
                 </p>
               </label>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className='rounded-md font-bold text-white bg-primary w-full mt-4 px-10 py-3'
-                type='submit'
-              >
-                odoslať
-              </motion.button>
+              {isSubmitting ? (
+                <button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className='rounded-md font-bold text-white bg-primary w-full mt-4 px-10 py-3 disabled:opacity-60'
+                  type='submit'
+                  disabled
+                >
+                  <AiOutlineLoading3Quarters className='inline-block animate-spin  h-5 w-5 mr-3' />
+                  odosiela...
+                </button>
+              ) : (
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className='rounded-md font-bold text-white bg-primary w-full mt-4 px-10 py-3'
+                  type='submit'
+                >
+                  odoslať
+                </motion.button>
+              )}
             </div>
           </form>
         )}
