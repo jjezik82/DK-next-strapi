@@ -28,19 +28,21 @@ const ProductModal = ({ productModalOpen, closeProductModal, product }) => {
     <>
       {productModalOpen && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, y: '-100vh', zoom: 0.5 }}
+          animate={{ opacity: 1, y: 0, zoom: 1 }}
           exit={{ opacity: 0 }}
           className='fixed top-0 left-0 right-0 bottom-0 bg-slate-700 z-[1002]'
         >
           <div className='container mx-auto'>
             <div className='row flex justify-center my-5'>
-              <button
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 className='text-primary text-6xl'
                 onClick={closeProductModal}
               >
                 <IoMdCloseCircleOutline />
-              </button>
+              </motion.button>
             </div>
             <div className='row flex my-5'>
               <div className='flex-initial w-1/2 p-10'>
@@ -49,7 +51,7 @@ const ProductModal = ({ productModalOpen, closeProductModal, product }) => {
                   navigation={true}
                   effect={'slide'}
                   loop={true}
-                  className='mySwiper'
+                  className='mySwiperModal'
                 >
                   {product.attributes.gallery.data.map((image, index) => (
                     <SwiperSlide key={index}>
@@ -76,13 +78,13 @@ const ProductModal = ({ productModalOpen, closeProductModal, product }) => {
                   className='mt-12'
                 >
                   <TabList className='flex'>
-                    <Tab className='flex-initial w-1/3 cursor-pointer bg-transparent text-white p-2 mx-3 text-center border-2 rounded-md font-bold border-white'>
+                    <Tab className='flex-initial w-1/3 cursor-pointer bg-transparent text-white p-2 mx-3 text-center border-2 rounded-md font-bold border-white hover:scale-110 transition-all'>
                       zloženie
                     </Tab>
-                    <Tab className='flex-initial w-1/3 cursor-pointer bg-transparent text-white p-2 mx-3 text-center border-2 rounded-md font-bold border-white'>
+                    <Tab className='flex-initial w-1/3 cursor-pointer bg-transparent text-white p-2 mx-3 text-center border-2 rounded-md font-bold border-white hover:scale-110 transition-all'>
                       skladovanie
                     </Tab>
-                    <Tab className='flex-initial w-1/3 cursor-pointer bg-transparent text-white p-2 mx-3 text-center border-2 rounded-md font-bold border-white'>
+                    <Tab className='flex-initial w-1/3 cursor-pointer bg-transparent text-white p-2 mx-3 text-center border-2 rounded-md font-bold border-white hover:scale-110 transition-all'>
                       energetické hodnoty
                     </Tab>
                   </TabList>

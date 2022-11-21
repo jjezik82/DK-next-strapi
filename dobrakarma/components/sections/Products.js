@@ -1,7 +1,7 @@
 // core version + navigation, pagination modules:
 import { useRef, useState } from 'react';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md';
 import { Navigation, EffectFade, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -13,6 +13,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 // import products from '../public/products';
 import ProductModal from '../modals/ProductModal';
+import Slide from 'react-reveal/Fade';
 
 const Products = ({ products }) => {
   const [productModalOpen, setProductModalOpen] = useState(false);
@@ -60,22 +61,27 @@ const Products = ({ products }) => {
 
   return (
     <section id='produkty' className='bg-primary bg-opacity-5'>
-      {productModalOpen && (
-        <ProductModal
-          productModalOpen={productModalOpen}
-          closeProductModal={closeProductModal}
-          product={activeProduct}
-        />
-      )}
+      <AnimatePresence initial={false} exitBeforeEnter={true}>
+        {productModalOpen && (
+          <ProductModal
+            productModalOpen={productModalOpen}
+            closeProductModal={closeProductModal}
+            product={activeProduct}
+          />
+        )}
+      </AnimatePresence>
       <div className='container mx-auto py-24 text-center relative'>
         <div className='row'>
-          <h1 className='text-6xl font-extrabold font-poppins'>
-            produkty<span className='text-primary'>.</span>
-          </h1>
+          <Slide bottom>
+            <h1 className='text-6xl font-extrabold font-poppins'>
+              produkty<span className='text-primary'>.</span>
+            </h1>
+          </Slide>
         </div>
         <div className='row py-8'>
           <div className='swiper-custom-pagination flex justify-center items-center md:block'></div>
         </div>
+
         <div className='row xl:px-20'>
           <Swiper
             ref={swiperRef}
@@ -90,71 +96,77 @@ const Products = ({ products }) => {
               <SwiperSlide key={product.id}>
                 <div className='each-slide-effect'>
                   <div className='flex flex-col lg:flex-row p-10'>
-                    <div className='flex-auto w-full lg:w-60 relative'>
-                      <img
-                        src={`${process.env.NEXT_PUBLIC_STRAPI_UPLOADS}${product.attributes.image.data.attributes.url}`}
-                        alt='img'
-                        className='h-full w-full rounded-md shadow-lg object-cover'
-                      />
-                      <button className='mt-[-50px] md:hidden flex-initial w-30 my-2 px-10 py-3 text-white rounded-md bg-primary'>
-                        zisti viac
-                      </button>
-                      <button
-                        className='absolute top-1/2 -translate-y-1/2 left-[-40px]  border-primary md:hidden'
-                        onClick={prevSlide}
-                      >
-                        <MdNavigateBefore className='mx-auto text-4xl text-primary' />
-                      </button>
-                      <button
-                        className='absolute top-1/2  -translate-y-1/2 right-[-40px]  border-primary md:hidden'
-                        onClick={nextSlide}
-                      >
-                        <MdNavigateNext className='mx-auto text-4xl text-primary' />
-                      </button>
-                    </div>
-                    <div className='hidden md:block z-10 flex-auto w-full lg:w-40 p-10 '>
-                      <div className='mt-[-150px] lg:mt-0 lg:ml-[-100px] shadow-lg bg-white h-full flex flex-col rounded-md'>
-                        <h1 className='font-bold font-poppins text-4xl mb-6 pt-20'>
-                          {product.attributes.title}
-                          <span className='text-primary'>.</span>
-                        </h1>
-                        <div className='h-[2px] w-[10%] mx-auto bg-primary mb-10'></div>
-                        <p className='font-poppins text-lg py-10 px-20 grow'>
-                          {product.attributes.description
-                            ? product.attributes.description.substring(0, 200) +
-                              '...'
-                            : ''}{' '}
-                        </p>
-                        <div className='flex justify-center py-5'>
-                          <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            className='flex-initial w-30 my-2 px-10 py-3 text-primary border-2 rounded-md border-primary'
-                            onClick={
-                              productModalOpen
-                                ? closeProductModal
-                                : openProductModal
-                            }
-                          >
-                            zisti viac
-                          </motion.button>
-                        </div>
-                        <div className='flex'>
-                          <button
-                            className='flex-auto w-50 p-5 border-t-2 border-r-[1px] border-primary'
-                            onClick={prevSlide}
-                          >
-                            <MdNavigateBefore className='mx-auto text-4xl text-primary' />
-                          </button>
-                          <button
-                            className='flex-auto w-50 p-5 border-t-2 border-l-[1px] border-primary'
-                            onClick={nextSlide}
-                          >
-                            <MdNavigateNext className='mx-auto text-4xl text-primary' />
-                          </button>
+                    <Slide left>
+                      <div className='flex-auto w-full lg:w-60 relative'>
+                        <img
+                          src={`${process.env.NEXT_PUBLIC_STRAPI_UPLOADS}${product.attributes.image.data.attributes.url}`}
+                          alt='img'
+                          className='h-full w-full rounded-md shadow-lg object-cover'
+                        />
+                        <button className='mt-[-50px] md:hidden flex-initial w-30 my-2 px-10 py-3 text-white rounded-md bg-primary'>
+                          zisti viac
+                        </button>
+                        <button
+                          className='absolute top-1/2 -translate-y-1/2 left-[-40px]  border-primary md:hidden'
+                          onClick={prevSlide}
+                        >
+                          <MdNavigateBefore className='mx-auto text-4xl text-primary' />
+                        </button>
+                        <button
+                          className='absolute top-1/2  -translate-y-1/2 right-[-40px]  border-primary md:hidden'
+                          onClick={nextSlide}
+                        >
+                          <MdNavigateNext className='mx-auto text-4xl text-primary' />
+                        </button>
+                      </div>
+                    </Slide>
+                    <Slide right>
+                      <div className='hidden md:block z-10 flex-auto w-full lg:w-40 p-10 '>
+                        <div className='mt-[-150px] lg:mt-0 lg:ml-[-100px] shadow-lg bg-white h-full flex flex-col rounded-md'>
+                          <h1 className='font-bold font-poppins text-4xl mb-6 pt-20'>
+                            {product.attributes.title}
+                            <span className='text-primary'>.</span>
+                          </h1>
+                          <div className='h-[2px] w-[10%] mx-auto bg-primary mb-10'></div>
+                          <p className='font-poppins text-lg py-10 px-20 grow'>
+                            {product.attributes.description
+                              ? product.attributes.description.substring(
+                                  0,
+                                  200
+                                ) + '...'
+                              : ''}{' '}
+                          </p>
+                          <div className='flex justify-center py-5'>
+                            <motion.button
+                              whileHover={{ scale: 1.1 }}
+                              whileTap={{ scale: 0.9 }}
+                              className='flex-initial w-30 my-2 px-10 py-3 text-primary border-2 rounded-md border-primary'
+                              onClick={
+                                productModalOpen
+                                  ? closeProductModal
+                                  : openProductModal
+                              }
+                            >
+                              zisti viac
+                            </motion.button>
+                          </div>
+                          <div className='flex'>
+                            <button
+                              className='flex-auto w-50 p-5 border-t-2 border-r-[1px] border-primary'
+                              onClick={prevSlide}
+                            >
+                              <MdNavigateBefore className='mx-auto text-4xl text-primary' />
+                            </button>
+                            <button
+                              className='flex-auto w-50 p-5 border-t-2 border-l-[1px] border-primary'
+                              onClick={nextSlide}
+                            >
+                              <MdNavigateNext className='mx-auto text-4xl text-primary' />
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Slide>
                   </div>
                 </div>
               </SwiperSlide>

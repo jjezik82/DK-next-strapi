@@ -48,6 +48,11 @@ body {
   border: none !important;
 }
 
+.mySwiperModal .swiper-button-next,
+.mySwiperModal .swiper-button-prev {
+  color: #02979e;
+}
+
 @media screen and (min-width: 768px) {
   .swiper-custom-pagination .swiper-pagination-bullet {
     height: 100%;
