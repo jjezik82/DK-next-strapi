@@ -119,6 +119,7 @@ const Header = () => {
                   spy={true}
                   smooth={true}
                   duration={500}
+                  onClick={handleNav}
                 >
                   {link.title}
                 </ScrollLink>

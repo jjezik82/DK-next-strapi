@@ -98,12 +98,22 @@ const Products = ({ products }) => {
                   <div className='flex flex-col lg:flex-row p-10'>
                     <Slide left>
                       <div className='flex-auto w-full lg:w-60 relative'>
+                        <h4 className='bg-primary py-2 text-white font-bold md:hidden rounded-t-md'>
+                          {product.attributes.title}
+                        </h4>
                         <img
                           src={`${process.env.NEXT_PUBLIC_STRAPI_UPLOADS}${product.attributes.image.data.attributes.url}`}
                           alt='img'
-                          className='h-full w-full rounded-md shadow-lg object-cover'
+                          className='h-full w-full rounded-b-md md:rounded-md shadow-lg object-cover'
                         />
-                        <button className='mt-[-50px] md:hidden flex-initial w-30 my-2 px-10 py-3 text-white rounded-md bg-primary'>
+                        <button
+                          className='mt-[-50px] md:hidden flex-initial w-30 my-2 px-10 py-3 text-white font-bold rounded-md bg-primary'
+                          onClick={
+                            productModalOpen
+                              ? closeProductModal
+                              : openProductModal
+                          }
+                        >
                           zisti viac
                         </button>
                         <button
@@ -123,12 +133,12 @@ const Products = ({ products }) => {
                     <Slide right>
                       <div className='hidden md:block z-10 flex-auto w-full lg:w-40 p-10 '>
                         <div className='mt-[-150px] lg:mt-0 lg:ml-[-100px] shadow-lg bg-white h-full flex flex-col rounded-md'>
-                          <h1 className='font-bold font-poppins text-4xl mb-6 pt-20'>
+                          <h1 className='font-bold font-poppins text-4xl mb-6 pt-20 flex-grow'>
                             {product.attributes.title}
                             <span className='text-primary'>.</span>
                           </h1>
                           <div className='h-[2px] w-[10%] mx-auto bg-primary mb-10'></div>
-                          <p className='font-poppins text-lg py-10 px-20 grow'>
+                          <p className='font-poppins text-lg py-10 px-20 grow md:max-h-[190px] lg:max-h-[230px]'>
                             {product.attributes.description
                               ? product.attributes.description.substring(
                                   0,

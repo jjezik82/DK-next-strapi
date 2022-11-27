@@ -16,7 +16,7 @@ const About = () => {
           </Slide>
         </div>
       </div>
-      <div className='row flex flex-wrap'>
+      <div className='row flex flex-wrap lg:flex-nowrap'>
         <div className='w-full xl:w-2/3 relative min-h-[500px] mt-10 xl:my-20 mr-0 xl:mr-[-50px] z-[1]'>
           <Image
             src={img1}
@@ -36,7 +36,7 @@ const About = () => {
             <h1 className='text-3xl text-white font-extrabold font-poppins m-10 xl:mx-32 xl:mt-16'>
               nápad vyrábať vegánske pochúťky vznikol v Edinburghu,
             </h1>
-            <p className='m-10 xl:mx-32 xl:my-16 text-white max-w-[400px] self-start text-justify'>
+            <p className='m-10 xl:mx-32 xl:my-16 text-white lg:max-w-[400px] self-start text-justify'>
               kde roky žila a študovala zakladateľka Dobrej Karmy Andrea. Andrea
               je dlhoročná vegánka, ktorá sa na univerzite venovala odboru
               výživy a technológie jedla. Dlhé roky mala blízky vzťah k zdravej
@@ -47,10 +47,10 @@ const About = () => {
           </div>
         </Slide>
       </div>
-      <div className='container mx-auto xl:py-24 relative'>
+      <div className='container mx-auto lg:py-24 relative'>
         <div className='row flex justify-center flex-wrap'>
           <Slide bottom>
-            <div className='flex flex-col xl:w-1/3 justify-center items-center order-2 xl:order1'>
+            <div className='flex flex-col lg:w-1/2 xl:w-1/3 justify-center items-center order-2 lg:order1'>
               <p className='m-10 mr-14 text-2xl max-w-[500px] self-start text-justify'>
                 <FaQuoteLeft className='text-primary mb-3' />
                 Vždy, keď som prišla na Slovensko navštíviť rodinu, musela som
@@ -66,7 +66,7 @@ const About = () => {
             </div>
           </Slide>
           <Slide bottom>
-            <div className='w-full xl:w-1/3 relative min-h-[600px]'>
+            <div className='w-full lg:w-1/2 xl:w-1/3 relative min-h-[600px]'>
               <Image
                 src={img2}
                 alt='dobra-karma-o-nas'

@@ -4,6 +4,9 @@ import { IoMdCloseCircleOutline } from 'react-icons/io';
 import { Navigation, EffectFade, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { SlEnergy } from 'react-icons/sl';
+import { BsListCheck, BsThermometerSnow } from 'react-icons/bs';
+
 // import Swiper and modules styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -31,7 +34,7 @@ const ProductModal = ({ productModalOpen, closeProductModal, product }) => {
           initial={{ opacity: 0, y: '-100vh', zoom: 0.5 }}
           animate={{ opacity: 1, y: 0, zoom: 1 }}
           exit={{ opacity: 0 }}
-          className='fixed top-0 left-0 right-0 bottom-0 bg-slate-700 z-[1002]'
+          className='fixed top-0 left-0 right-0 bottom-0 bg-slate-700 z-[1002] overflow-y-scroll'
         >
           <div className='container mx-auto'>
             <div className='row flex justify-center my-5'>
@@ -44,8 +47,8 @@ const ProductModal = ({ productModalOpen, closeProductModal, product }) => {
                 <IoMdCloseCircleOutline />
               </motion.button>
             </div>
-            <div className='row flex my-5'>
-              <div className='flex-initial w-1/2 p-10'>
+            <div className='row flex flex-col md:flex-row my-5'>
+              <div className='flex-initial w-full md:w-1/2 p-10'>
                 <Swiper
                   modules={[Navigation, EffectFade]}
                   navigation={true}
@@ -64,11 +67,11 @@ const ProductModal = ({ productModalOpen, closeProductModal, product }) => {
                   ))}
                 </Swiper>
               </div>
-              <div className='flex-initial w-1/2 p-10'>
+              <div className='flex-initial w-full md:w-1/2 p-10'>
                 <h1 className='text-white text-5xl mb-10'>
                   {product.attributes.title}
                 </h1>
-                <h3 className='text-xl text-white'>
+                <h3 className='text-xl text-white text-justify'>
                   {product.attributes.description}
                 </h3>
                 <Tabs
@@ -79,32 +82,44 @@ const ProductModal = ({ productModalOpen, closeProductModal, product }) => {
                 >
                   <TabList className='flex'>
                     <Tab className='flex-initial w-1/3 cursor-pointer bg-transparent text-white p-2 mx-3 text-center border-2 rounded-md font-bold border-white hover:scale-110 transition-all'>
-                      zloženie
+                      <BsListCheck className='mx-auto' />
+                      <p className='hidden md:block'>zloženie</p>
                     </Tab>
                     <Tab className='flex-initial w-1/3 cursor-pointer bg-transparent text-white p-2 mx-3 text-center border-2 rounded-md font-bold border-white hover:scale-110 transition-all'>
-                      skladovanie
+                      <BsThermometerSnow className='mx-auto' />
+                      <p className='hidden md:block'>skladovanie</p>
                     </Tab>
                     <Tab className='flex-initial w-1/3 cursor-pointer bg-transparent text-white p-2 mx-3 text-center border-2 rounded-md font-bold border-white hover:scale-110 transition-all'>
-                      energetické hodnoty
+                      <SlEnergy className='mx-auto' />
+                      <p className='hidden md:block'>energetické hodnoty</p>
                     </Tab>
                   </TabList>
                   <TabPanel>
                     <div className='mx-3 mt-8'>
-                      <h3 className='text-xl text-white'>
+                      <h4 className='md:hidden my-2 text-2xl font-bold text-primary text-center'>
+                        zloženie
+                      </h4>
+                      <h3 className='text-xl text-white text-justify'>
                         {product.attributes.ingredients}
                       </h3>
                     </div>
                   </TabPanel>
                   <TabPanel>
                     <div className='mx-3 mt-8'>
-                      <h3 className='text-xl text-white'>
+                      <h4 className='md:hidden my-2 text-2xl font-bold text-primary text-center'>
+                        skladovanie
+                      </h4>
+                      <h3 className='text-xl text-white text-justify'>
                         {product.attributes.storage}
                       </h3>
                     </div>
                   </TabPanel>
                   <TabPanel>
                     <div className='mx-3 mt-8'>
-                      <h3 className='text-xl text-white'>
+                      <h4 className='md:hidden my-2 text-2xl font-bold text-primary text-center'>
+                        energetické hodnoty
+                      </h4>
+                      <h3 className='text-xl text-white text-justify'>
                         {product.attributes.nutrition}
                       </h3>
                     </div>
