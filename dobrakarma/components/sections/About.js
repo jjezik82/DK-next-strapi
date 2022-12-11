@@ -19,20 +19,14 @@ const About = () => {
       <div className='row flex flex-wrap lg:flex-nowrap'>
         <div className='w-full xl:w-2/3 relative min-h-[500px] mt-10 xl:my-20 mr-0 xl:mr-[-50px] z-[1]'>
           <Image
+            className='object-cover md:rounded-tr-md md:rounded-br-md shadow-md'
             src={img1}
             alt='dobra-karma-o-nas'
             fill
-            style={{
-              objectFit: 'cover',
-              borderTopRightRadius: '6px',
-              borderBottomRightRadius: '6px',
-              boxShadow:
-                '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-            }}
           />
         </div>
         <Slide right>
-          <div className='flex flex-col w-full xl:w-1/2 justify-center items-center bg-primary py-20 xl:rounded-l-md shadow-md'>
+          <div className='flex flex-col w-full xl:w-1/2 justify-center items-center bg-primary py-10 md:py-20 xl:rounded-l-md shadow-md'>
             <h1 className='text-3xl text-white font-extrabold font-poppins m-10 xl:mx-32 xl:mt-16'>
               nápad vyrábať vegánske pochúťky vznikol v Edinburghu,
             </h1>
@@ -51,7 +45,7 @@ const About = () => {
         <div className='row flex justify-center flex-wrap'>
           <Slide bottom>
             <div className='flex flex-col lg:w-1/2 xl:w-1/3 justify-center items-center order-2 lg:order1'>
-              <p className='m-10 mr-14 text-2xl max-w-[500px] self-start text-justify'>
+              <p className='m-10 mr-14  max-w-[500px] self-start text-justify'>
                 <FaQuoteLeft className='text-primary mb-3' />
                 Vždy, keď som prišla na Slovensko navštíviť rodinu, musela som
                 sa stravovať o niečo fádnejšie pre nedostatok vegánskych
@@ -68,16 +62,10 @@ const About = () => {
           <Slide bottom>
             <div className='w-full lg:w-1/2 xl:w-1/3 relative min-h-[600px]'>
               <Image
+                className='object-cover md:rounded-md shadow-md'
                 src={img2}
                 alt='dobra-karma-o-nas'
                 fill
-                style={{
-                  objectFit: 'cover',
-                  borderTopRightRadius: '6px',
-                  borderBottomRightRadius: '6px',
-                  borderTopLeftRadius: '6px',
-                  borderBottomLeftRadius: '6px',
-                }}
               />
             </div>
           </Slide>

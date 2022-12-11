@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { SlEnergy } from 'react-icons/sl';
 import { BsListCheck, BsThermometerSnow } from 'react-icons/bs';
+import ReactMarkdown from 'react-markdown';
 
 // import Swiper and modules styles
 import 'swiper/css';
@@ -15,7 +16,7 @@ import 'swiper/css/effect-fade';
 import 'react-tabs/style/react-tabs.css';
 import { useState } from 'react';
 
-const ProductModal = ({ productModalOpen, closeProductModal, product }) => {
+const ProductModal = ({ productModalOpen, toggleProductModal, product }) => {
   const [tabIndex, setTabIndex] = useState(0);
 
   const pagination = {
@@ -31,8 +32,8 @@ const ProductModal = ({ productModalOpen, closeProductModal, product }) => {
     <>
       {productModalOpen && (
         <motion.div
-          initial={{ opacity: 0, y: '-100vh', zoom: 0.5 }}
-          animate={{ opacity: 1, y: 0, zoom: 1 }}
+          initial={{ opacity: 0, y: '-50vh' }}
+          animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
           className='fixed top-0 left-0 right-0 bottom-0 bg-slate-700 z-[1002] overflow-y-scroll'
         >
@@ -42,7 +43,7 @@ const ProductModal = ({ productModalOpen, closeProductModal, product }) => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 className='text-primary text-6xl'
-                onClick={closeProductModal}
+                onClick={toggleProductModal}
               >
                 <IoMdCloseCircleOutline />
               </motion.button>
@@ -99,9 +100,9 @@ const ProductModal = ({ productModalOpen, closeProductModal, product }) => {
                       <h4 className='md:hidden my-2 text-2xl font-bold text-primary text-center'>
                         zloženie
                       </h4>
-                      <h3 className='text-xl text-white text-justify'>
+                      <ReactMarkdown className='text-xl text-white text-justify'>
                         {product.attributes.ingredients}
-                      </h3>
+                      </ReactMarkdown>
                     </div>
                   </TabPanel>
                   <TabPanel>
@@ -109,9 +110,9 @@ const ProductModal = ({ productModalOpen, closeProductModal, product }) => {
                       <h4 className='md:hidden my-2 text-2xl font-bold text-primary text-center'>
                         skladovanie
                       </h4>
-                      <h3 className='text-xl text-white text-justify'>
+                      <ReactMarkdown className='text-xl text-white text-justify'>
                         {product.attributes.storage}
-                      </h3>
+                      </ReactMarkdown>
                     </div>
                   </TabPanel>
                   <TabPanel>
@@ -119,9 +120,9 @@ const ProductModal = ({ productModalOpen, closeProductModal, product }) => {
                       <h4 className='md:hidden my-2 text-2xl font-bold text-primary text-center'>
                         energetické hodnoty
                       </h4>
-                      <h3 className='text-xl text-white text-justify'>
+                      <ReactMarkdown className='text-xl text-white text-justify'>
                         {product.attributes.nutrition}
-                      </h3>
+                      </ReactMarkdown>
                     </div>
                   </TabPanel>
                 </Tabs>

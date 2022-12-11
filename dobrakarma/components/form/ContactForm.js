@@ -45,7 +45,7 @@ const ContactForm = () => {
 
   return (
     <Slide right>
-      <div className='w-full xl:w-1/2 max-w-xl xl:p-10 m-10'>
+      <div className='w-full xl:w-1/2 xl:p-10 m-10 max-w-[500px]'>
         <Formik
           initialValues={{ name: '', email: '', subject: '', message: '' }}
           validationSchema={schema}

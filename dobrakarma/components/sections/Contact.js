@@ -59,7 +59,7 @@ const Contact = () => {
                     style={{ objectFit: 'contain', padding: '20px' }}
                   />
                 </div>
-                <div className='mx-5 my-10 xl:m-20'>
+                <div className='mx-5 my-10 md:m-20 xl:m-20'>
                   <h3 className='text-3xl font-poppins font-bold text-white mb-4'>
                     Dobrá Karma s.r.o.
                   </h3>

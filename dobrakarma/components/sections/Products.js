@@ -1,5 +1,5 @@
 // core version + navigation, pagination modules:
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md';
@@ -22,8 +22,9 @@ const Products = ({ products }) => {
   const goToRef = useRef(null);
   const swiperRef = useRef(null);
 
-  const openProductModal = () => setProductModalOpen(true);
-  const closeProductModal = () => setProductModalOpen(false);
+  const toggleProductModal = () => {
+    setProductModalOpen(!productModalOpen);
+  };
 
   const prevSlide = () => {
     swiperRef.current?.swiper.slidePrev();
@@ -41,15 +42,12 @@ const Products = ({ products }) => {
     );
   };
 
-  swiperRef.current?.swiper.on('activeIndexChange', function () {
-    const activeIndex = swiperRef.current?.swiper.realIndex;
-    setActiveProduct(products.data[parseInt(activeIndex)]);
-  });
-
-  const goToSlide = (e) => {
-    swiperRef.current?.swiper.slideTo(parseInt(e.target.id) + 1);
-    setActiveSlide(swiperRef.current?.swiper.activeIndex);
-  };
+  useEffect(() => {
+    swiperRef.current?.swiper.on('activeIndexChange', function () {
+      const activeIndex = swiperRef.current?.swiper.realIndex;
+      setActiveProduct(products.data[parseInt(activeIndex)]);
+    });
+  }, [swiperRef]);
 
   const pagination = {
     el: '.swiper-custom-pagination',
@@ -61,11 +59,11 @@ const Products = ({ products }) => {
 
   return (
     <section id='produkty' className='bg-primary bg-opacity-5'>
-      <AnimatePresence initial={false} exitBeforeEnter={true}>
+      <AnimatePresence initial={false} wait={true}>
         {productModalOpen && (
           <ProductModal
             productModalOpen={productModalOpen}
-            closeProductModal={closeProductModal}
+            toggleProductModal={toggleProductModal}
             product={activeProduct}
           />
         )}
@@ -91,6 +89,7 @@ const Products = ({ products }) => {
             effect={'fade'}
             loop={false}
             className='mySwiper'
+            allowTouchMove={false}
           >
             {products.data.map((product) => (
               <SwiperSlide key={product.id}>
@@ -108,11 +107,7 @@ const Products = ({ products }) => {
                         />
                         <button
                           className='mt-[-50px] md:hidden flex-initial w-30 my-2 px-10 py-3 text-white font-bold rounded-md bg-primary'
-                          onClick={
-                            productModalOpen
-                              ? closeProductModal
-                              : openProductModal
-                          }
+                          onClick={toggleProductModal}
                         >
                           zisti viac
                         </button>
@@ -151,11 +146,7 @@ const Products = ({ products }) => {
                               whileHover={{ scale: 1.1 }}
                               whileTap={{ scale: 0.9 }}
                               className='flex-initial w-30 my-2 px-10 py-3 text-primary border-2 rounded-md border-primary'
-                              onClick={
-                                productModalOpen
-                                  ? closeProductModal
-                                  : openProductModal
-                              }
+                              onClick={toggleProductModal}
                             >
                               zisti viac
                             </motion.button>

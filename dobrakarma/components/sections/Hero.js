@@ -21,12 +21,12 @@ const Hero = () => {
       <div className='flex-initial  w-full md:w-1/2 h-[400px] md:min-h-[800px] md:order-1 bg-hero-pattern2 bg-cover bg-top mt-[108px] lg:mt-0'></div>
       <div className=' bg-primary flex-initial w-full md:w-1/2 mx-auto text-center flex flex-col justify-center items-center md:mt-[108px] lg:mt-0'>
         <div className='flex xl:w-1/2 w-full p-10 lg:p-20 xl:p-0 justify-center flex-col '>
-          <h1 className='md:text-7xl sm:text-5xl text-4xl font-extrabold py-4 md:py-6 font-poppins text-white lowercase text-left'>
-            Ručne Vyrábané Vegánske Syry.
+          <h1 className='md:text-7xl sm:text-5xl text-4xl font-extrabold py-4 md:pb-6 md:pt-20 font-poppins text-white lowercase text-left'>
+            Ručne Vyrábané Vegánske Produkty.
           </h1>
           <p className='text-xl font-poppins text-white text-left'>
-            našim cieľom je ponúkať kvalitné vegánske syry, ktorých základom sú
-            predovšetkým kvalitné ingrediencie
+            našim cieľom je ponúkať kvalitné vegánske produkty, ktorých základom
+            sú predovšetkým kvalitné ingrediencie
           </p>
           <motion.button
             whileHover={{ scale: 1.1 }}
